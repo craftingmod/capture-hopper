@@ -38,6 +38,8 @@ node ./build/index.js
    * `{hours}`: 시(2자리)
    * `{minutes}`: 분(2자리)
    * `{seconds}`: 초(2자리)
+   * `{orgdir}`: 원래 이미지의 폴더 경로
+   * `{namecode}`: [파일 이름을 기반으로 한 해시](https://stackoverflow.com/questions/7616461/generate-a-hash-from-string-in-javascript)
  * 예시
 ```
 D:/Arcihve/{year}-{month}/스크린샷_{year2}{month}{day}_{hours}{minutes}{seconds}
