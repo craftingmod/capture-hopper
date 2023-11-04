@@ -80,7 +80,10 @@ async function processFile(filePath: string) {
   }
   try {
     await fs.access(destPath, fs.constants.R_OK)
-    return false
+    return {
+      success: false,
+      path: filePath,
+    }
   } catch (err2) {
     await fs.access(Path.dirname(destPath), fs.constants.W_OK)
     if (!config.removeOrginal) {
@@ -88,7 +91,10 @@ async function processFile(filePath: string) {
     } else {
       await fs.rename(filePath, destPath)
     }
-    return true
+    return {
+      success: true,
+      path: destPath,
+    }
   }
 }
 
@@ -107,7 +113,7 @@ try {
     const filePath = Path.resolve(targetFile.path, targetFile.name)
     debug(`(${chalk.yellow((filesIndex + 1))}/${chalk.red(captureFiles.length)}) ${chalk.green(filePath)} 처리 중`)
     // 처리
-    const isMoved = await processFile(filePath)
+    const isMoved = (await processFile(filePath)).success
     if (isMoved) {
       filesMoved += 1
     }
@@ -145,8 +151,8 @@ async function runDaemon() {
         if (fileStat.birthtimeMs >= lastWatched) {
           debug(`파일 변경: ${chalk.green(filePath)}`)
           lastWatched = fileStat.birthtimeMs
-          await processFile(filePath)
-          if (config.moveNotification) {
+          const processResult = await processFile(filePath)
+          if (config.moveNotification && processResult.success) {
             notify({
               title: makeTitle(translation.titleSingleMove),
               message: translation.messageSingleMove.replace("%s", event.filename),
@@ -154,7 +160,7 @@ async function runDaemon() {
               wait: true,
             }).then((action) => {
               if (action === NotiAction.CLICKED) {
-                openApp(filePath)
+                openApp(processResult.path)
               }
             })
           }
