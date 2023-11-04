@@ -151,6 +151,7 @@ async function runDaemon() {
               title: makeTitle(translation.titleSingleMove),
               message: translation.messageSingleMove.replace("%s", event.filename),
               sound: true,
+              wait: true,
             }).then((action) => {
               if (action === NotiAction.CLICKED) {
                 openApp(filePath)
