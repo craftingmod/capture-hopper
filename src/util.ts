@@ -5,8 +5,12 @@ function padNumber(num: number | string, size: number) {
 }
 
 export function wrapPath(path: string, fileStats: Stats, filePath: { path: string, name: string }, extension: string) {
-  const createdDate = fileStats.birthtime
-
+  let createdDate = new Date()
+  if (fileStats.mtimeMs < fileStats.ctimeMs) {
+    createdDate = fileStats.mtime
+  } else {
+    createdDate = fileStats.ctime
+  }
   const wrapMap = {
     "{year2}": createdDate.getFullYear() % 100,
     "{year}": createdDate.getFullYear(),
