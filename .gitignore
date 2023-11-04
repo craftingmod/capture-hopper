@@ -11,3 +11,4 @@ yarn.lock
 
 # eslint
 dist
+config.json

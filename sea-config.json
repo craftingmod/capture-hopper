@@ -1,0 +1,4 @@
+{
+  "main": "./build/index-single.mjs",
+  "output": "./build/sea-prep.blob"
+}
