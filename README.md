@@ -51,4 +51,17 @@ D:/Arcihve/2023-11/스크린샷_231104_092005.png
  * 로 저장됨
 6. 수정을 하였으면 다시 실행
 
-7. PROFIT! 
+7. PROFIT!
+
+## 자동으로 실행하기
+1. npm으로 forever 깔기
+```
+npm i -g forever
+```
+2. 작업 스케쥴러에서 새 작업 생성
+ * 프로그램: `powershell.exe`
+ * 인수 추가: `-File "C:\Users\유저이름\AppData\Local\npm\forever.ps1" start build/index.js`
+ * 시작 위치: `capture-hopper 디렉토리`
+ * 로그온 시 실행
+
+3. PROFIT
