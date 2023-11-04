@@ -6,8 +6,8 @@ export const koLang = {
   messageOutputType: "%s 파일을 열어 movePattern 부분을 수정해 주세요.",
   titleBatchMove: "스크린샷 전체 옮김",
   messageBatchMove: "%s개의 사진을 옮겼습니다.",
-  titleSingleMove: "스크린샷 옮김",
-  messageSingleMove: "%s 파일을 옮겼습니다.",
+  titleSingleMove: "저장된 스크린샷",
+  messageSingleMove: "%s 파일로 저장되었습니다.",
   titleError: "오류 발생",
   messageError: "오류가 발생하였습니다.\n%s",
 }

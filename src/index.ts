@@ -147,10 +147,14 @@ async function runDaemon() {
           lastWatched = fileStat.birthtimeMs
           await processFile(filePath)
           if (config.moveNotification) {
-            await notify({
+            notify({
               title: makeTitle(translation.titleSingleMove),
               message: translation.messageSingleMove.replace("%s", event.filename),
               sound: true,
+            }).then((action) => {
+              if (action === NotiAction.CLICKED) {
+                openApp(filePath)
+              }
             })
           }
         }

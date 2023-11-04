@@ -12,7 +12,6 @@ export const notify = (notification: Notifier.Notification & { sound?: boolean, 
   const timeout = setTimeout(() => rej(new Error("Timeout!")), 60000)
   Notifier.notify({
     icon: Path.resolve("./icon_default.png"),
-
     ...notification,
   }, (err, response, metadata) => { // err, response, metadata
     const action = (metadata as { action: string } | undefined)?.action ?? ""
