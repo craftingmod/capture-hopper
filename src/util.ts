@@ -45,6 +45,14 @@ export function makeTitle(title: string) {
   return `[CaptureHopper] ${title}`
 }
 
+export async function sleep(ms: number) {
+  return new Promise<void>((res) => {
+    setTimeout(() => {
+      res()
+    }, ms)
+  })
+}
+
 const cyrb53 = (str: string, seed = 0) => {
   let h1 = 0xdeadbeef ^ seed, h2 = 0x41c6ce57 ^ seed;
   for (let i = 0, ch; i < str.length; i++) {

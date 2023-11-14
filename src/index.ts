@@ -4,7 +4,7 @@ import { getPicturesFolder } from "platform-folders"
 import { openApp } from "open"
 import Path from "node:path"
 import { NotiAction, notify } from "./notify.js"
-import { makeTitle, wrapPath } from "./util.js"
+import { makeTitle, sleep, wrapPath } from "./util.js"
 import Debug from "debug"
 import chalk from "chalk"
 import { enLang, koLang } from "./lang/lang.js"
@@ -149,6 +149,8 @@ async function runDaemon() {
         const filePath = Path.resolve(config.capturePath, event.filename)
         const fileStat = await fs.stat(filePath, { bigint: true })
         if (fileStat.birthtimeMs >= lastWatched) {
+          // 5초 대기
+          await sleep(1000)
           debug(`파일 변경: ${chalk.green(filePath)}`)
           lastWatched = fileStat.birthtimeMs
           const processResult = await processFile(filePath)
